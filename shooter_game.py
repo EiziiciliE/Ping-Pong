@@ -6,14 +6,12 @@ from random import *
 #создай окно игры
 window = display.set_mode((700, 500))
 display.set_caption("ТОПА")
-background = transform.scale(image.load("galaxy.jpg"),(700, 500))
 #Задай FPS 60 кадров/сек
 FPS = 60
 #Установи фоновую музыку
 mixer.init()
 mixer.music.load("turu-tu-tu.mp3")
 mixer.music.play()
-fire_sosi = mixer.Sound("fire.ogg")
 #обработай событие «клик по кнопке "Закрыть окно"»
 game = True
 clock = time.Clock()
@@ -33,18 +31,41 @@ class GameSprite(sprite.Sprite):
         window.blit(self.image, (self.rect.x, self.rect.y))
 
 class Player(GameSprite):
-    def update(self):     
+    def update_W_S(self):     
             
         key_pressed = key.get_pressed()
 
-        if key_pressed[K_w] and self.rect.y > 0:
-            self.rect.x-= self.speed
+        if key_pressed[K_w] and self.rect.y > 5:
+            self.rect.y-= self.speed
 
-        if key_pressed[K_s] and self.rect.x < 440:
-            self.rect.x+= self.speed
+        if key_pressed[K_s] and self.rect.y < 430:
+            self.rect.y+= self.speed
 
+    def update_Up_Down(self):     
+            
+        key_pressed = key.get_pressed()
 
+        if key_pressed[K_UP] and self.rect.y > 5:
+            self.rect.y-= self.speed
+
+        if key_pressed[K_DOWN] and self.rect.y < 430:
+            self.rect.y+= self.speed
+
+red = Player("Krasnuy_P.png", 0, 10, 10, 12, 90)
+blue = Player("Siniy_P.png", 690, 10, 10, 12, 90)
+
+black=(0,0,0)
 while game:
-    
+
+    for e in event.get():
+        if e.type == QUIT:
+            game = False
+    window.fill(black)
+    red.update_W_S()
+    red.reset()
+
+    blue.update_Up_Down()
+    blue.reset()
+
     display.update()
     clock.tick(FPS)
