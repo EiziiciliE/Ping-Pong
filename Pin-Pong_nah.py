@@ -51,8 +51,8 @@ class Player(GameSprite):
         if key_pressed[K_DOWN] and self.rect.y < 430:
             self.rect.y+= self.speed
 
-red = Player("Krasnuy_P.png", 0, 10, 10, 12, 90)
-blue = Player("Siniy_P.png", 690, 10, 10, 12, 90)
+red = Player("Krasnuy_P.png", 0, 10, 10, 10, 90)
+blue = Player("Siniy_P.png", 690, 10, 10, 10, 90)
 
 black=(0,0,0)
 while game:
