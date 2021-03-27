@@ -9,9 +9,9 @@ display.set_caption("ТОПА")
 #Задай FPS 60 кадров/сек
 FPS = 60
 #Установи фоновую музыку
-mixer.init()
-mixer.music.load("turu-tu-tu.mp3")
-mixer.music.play()
+#mixer.init()
+#mixer.music.load("turu-tu-tu.mp3")
+#mixer.music.play()
 #обработай событие «клик по кнопке "Закрыть окно"»
 game = True
 clock = time.Clock()
