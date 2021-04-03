@@ -5,7 +5,7 @@ from random import *
 
 #создай окно игры
 window = display.set_mode((700, 500))
-display.set_caption("ТОПА")
+display.set_caption("The Ping-Pong")
 #Задай FPS 60 кадров/сек
 FPS = 60
 #Установи фоновую музыку
@@ -50,22 +50,55 @@ class Player(GameSprite):
 
         if key_pressed[K_DOWN] and self.rect.y < 430:
             self.rect.y+= self.speed
+font.init()
+text_of_pryamougolniki = font.Font(None, 80)
+win_red = text_of_pryamougolniki.render('Red is win', True, (0, 255, 0))
+win_blue = text_of_pryamougolniki.render('blue is win', True, (0, 255, 0))
 
+ball = GameSprite("Ball.png", 320, 220, 10, 30, 30)
 red = Player("Krasnuy_P.png", 0, 10, 10, 10, 90)
 blue = Player("Siniy_P.png", 690, 10, 10, 10, 90)
 
+ball_sx = 3
+ball_sy = 3
+
 black=(0,0,0)
+finish = False
 while game:
 
     for e in event.get():
         if e.type == QUIT:
             game = False
-    window.fill(black)
-    red.update_W_S()
-    red.reset()
+    if not finish:
+        window.fill(black)
 
-    blue.update_Up_Down()
-    blue.reset()
+        ball.rect.x += ball_sx
+        ball.rect.y += ball_sy
+        if ball.rect.y < 0 or ball.rect.y > 500 -30:
+            ball_sy *= -1      
+
+
+        if sprite.collide_rect(ball, red):
+            ball_sx *= -1
+        if sprite.collide_rect(ball, blue):
+            ball_sx *= -1
+
+        if ball.rect.x < 0:
+            window.blit(win_blue, (100,100))
+            finish = True
+
+        if ball.rect.x > 700 -30:
+            window.blit(win_red, (100,100))
+            finish = True
+
+        red.update_W_S()
+        red.reset()
+
+        blue.update_Up_Down()
+        blue.reset()
+
+        ball.reset()
+
 
     display.update()
     clock.tick(FPS)
