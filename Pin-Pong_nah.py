@@ -38,7 +38,7 @@ class Player(GameSprite):
         if key_pressed[K_w] and self.rect.y > 5:
             self.rect.y-= self.speed
 
-        if key_pressed[K_s] and self.rect.y < 401:
+        if key_pressed[K_s] and self.rect.y < 395:
             self.rect.y+= self.speed
 
     def update_Up_Down(self):     
@@ -48,16 +48,16 @@ class Player(GameSprite):
         if key_pressed[K_UP] and self.rect.y > 5:
             self.rect.y-= self.speed
 
-        if key_pressed[K_DOWN] and self.rect.y < 401:
+        if key_pressed[K_DOWN] and self.rect.y < 395:
             self.rect.y+= self.speed
 font.init()
 text_of_pryamougolniki = font.Font(None, 80)
-win_red = text_of_pryamougolniki.render('Red is win', True, (0, 255, 0))
-win_blue = text_of_pryamougolniki.render('blue is win', True, (0, 255, 0))
+win_red = text_of_pryamougolniki.render('Red win', True, (0, 255, 0))
+win_blue = text_of_pryamougolniki.render('blue win', True, (0, 255, 0))
 
-ball = GameSprite("Ball.png", 320, 220, 10, 30, 30)
-red = Player("Krasnuy_P.png", 0, 180, 10, 10, 95)
-blue = Player("Siniy_P.png", 690, 180, 10, 10, 95)
+ball = GameSprite("Ball.png", 320, 220, 10, 25, 25)
+red = Player("Krasnuy_P.png", 0, 180, 10, 12, 100)
+blue = Player("Siniy_P.png", 688, 180, 10, 12, 100)
 
 ball_sx = 6
 ball_sy = 6
@@ -84,11 +84,11 @@ while game:
             ball_sx *= -1
 
         if ball.rect.x < 0:
-            window.blit(win_blue, (210,210))
+            window.blit(win_blue, (230,210))
             finish = True
 
         if ball.rect.x > 700 -30:
-            window.blit(win_red, (210,210))
+            window.blit(win_red, (230,210))
             finish = True
 
         red.update_W_S()
